@@ -1,5 +1,5 @@
 Package: countyfipsR
-Title: What the Package Does (One Line, Title Case)
+Title: Merge county-level FIPS and GNIS codes
 Version: 0.0.0.9000
 Authors@R: 
     person("Chris", "Goodman", , "cgoodman@niu.edu", role = c("aut", "cre"),
