@@ -1,0 +1,31 @@
+---
+title: "Using countyfipsR"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+<Intro>
+
+## Getting Data
+There are two methods for getting data from `countyfipsR`. First, `countyfipsR` contains a `tibble` data frame, `countyfips`, for easily accessing unfiltered county data.
+
+```{r countydata}
+library(countyfipsR)
+
+head(countyfips)
+```
+
+The second method, `get_countyfips` allows for easy filtering of data by state. Simply, specify the state or territory you would like, and `get_countyfips` returns a `tibble` of the requested data.
+
+```{r get_countyfips}
+dataIL <- get_countyfips(state = "illinois")
+
+head(dataIL)
+```
+
+## Merging Data

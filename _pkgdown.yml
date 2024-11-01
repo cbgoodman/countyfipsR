@@ -7,4 +7,3 @@ template:
     base_font: {google: "Open Sans"}
     heading_font: {google: "Open Sans"}
     code_font: {google: "Source Code Pro"}
-
