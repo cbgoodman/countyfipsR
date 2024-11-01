@@ -1,2 +1,8 @@
 ^countyfipsR\.Rproj$
 ^\.Rproj\.user$
+^LICENSE\.md$
+^data-raw$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
