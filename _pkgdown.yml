@@ -3,13 +3,15 @@ url: https://cbgoodman.github.io/countyfipsR/
 template:
   bootstrap: 5
   bslib:
-    bootswatch: flatly
-    pkgdown-nav-height: 100px
+    bootswatch: cosmo
+    #pkgdown-nav-height: 100px
     base_font: {google: "Open Sans"}
     heading_font: {google: "Open Sans"}
     code_font: {google: "Source Code Pro"}
+    #font-size-root: 0.7rem
 
 navbar:
+  bg: dark
   structure:
     left: [articles, reference]
     right: [search, github]
