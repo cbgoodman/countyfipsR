@@ -33,13 +33,16 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="articles/using-countyfipsr.html">Using countyfipsR</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Tutorials</h6></li>
+    <li><a class="dropdown-item" href="articles/fuzzy-merging.html">Fuzzy Merging</a></li>
   </ul>
 </li>
+<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -56,7 +59,7 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="countyfipsr">countyfipsR<a class="anchor" aria-label="anchor" href="#countyfipsr"></a>
 </h1></div>
-<p><code>countyfipsR</code> is a simple R crosswalk package for adding various county-level identifiers (name, FIPS, ICPSR codes) that may be missing from your dataset. The purpose of this program is to facilitate merging datasets that do not share a common identifier.</p>
+<p><code>countyfipsR</code> is a simple R crosswalk package for adding various county-level identifiers (name, FIPS, GNIS codes) that may be missing from your dataset. The purpose of this program is to facilitate merging datasets that do not share a common identifier.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
