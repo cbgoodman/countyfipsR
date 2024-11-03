@@ -1,0 +1,75 @@
+---
+title: "Fuzzy Merging"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Load in a sample of five counties.
+
+```{r setup, message=FALSE, warning=FALSE}
+library(countyfipsR)
+library(fuzzyjoin)
+library(dplyr)
+
+head(countyfips_sample)
+
+```
+
+Perhaps one wants to merge in land and water areas by county; however, you don't have any numerical identifies to do this with. All you have is an unclean text document with (bad) county names as the identifier. The 'county_name' variable is correct in some instances, missing parts of the name (county or a period), or entirely misspelled. 
+
+```{r malformed-data}
+
+badmerge <- tribble(
+  ~"county_name",        ~"state_name",         ~"aland",        ~"awater",
+  "Harris",              "Georgia",             41201240346,     23711353,
+  "St Thomas Island",   "U.S. Virgin Islands",  81108880,        717920922,
+  "Mckenzie County",     "North Dakota",        7148712746,      260119355,
+  "Briscoe County",      "Texas",               2330991073,      4068657,
+  "Pal Alto County",     "Iowa",                1460400553,	     14428727,
+  "Mineral County",      "Montana",             3158799812,      9897218
+)
+
+```
+
+The `fuzzyjoin` package is perfect for this situation. 
+
+The `stringdist_left_join` command does the work. As an aside, all the typical join methods are available by modifying the 'inner' portion of the command. You can also use a 'mode' option within the command to specify the join method. 
+
+The choice of method is well beyond this article; however, they are all the options available from the `stringdist` package. Documentation can be found [here](https://github.com/markvanderloo/stringdist) and more on the various methods (theory mostly) can be found [here](https://www.baeldung.com/cs/string-similarity-edit-distance). `method = "jw"` implements Jaro-Winkler distance, which appears to be (to my untrained eye) the best character based matching method. 
+
+```{r fuzzy-join}
+
+joined <- countyfips_sample |>
+  stringdist_inner_join(
+    badmerge, 
+    by = "county_name",   #match based on county_name
+    method = "jw",        #use jw distance metric
+    max_dist = 0.5, 
+    distance_col = "dist"
+  ) |>
+  group_by(county_name.x) |>
+  slice_min(order_by=dist, n=1)
+
+joined |> select(fips, county_name.x, county_name.y, dist)
+```
+
+Here, `stringdist_inner_join` is attempting to match the 'county_name' string in 'countyfips_sample' with the same variable in the 'badmerge' data. It's doing so with the Jaro-Winkler distance method with a max distance of 0.5 (JW = 0 for no matched string and JW = 1 for exact matches; the choice of max distance is relatively arbitrary) and saves that distance into column 'dist'. Then, data are grouped by counties we want to merge to and we select the group-row with the smallest value of dist (or what `stringdist_inner_join` believes to be the best match). 
+
+In this example, `stringdist_inner_join` does accurately match the malformed data to our clean `countyfipsR` data. If you want to see the other potential matches, exclude the `slice_min` options to see the full range of matching attempts.  
+
+```{r cleaned}
+joined |> 
+  select(-c(county_name.y, state_name.y)) |> 
+  rename(
+    county_name = county_name.x, 
+    state_name = state_name.x
+    ) |>
+  select(fips, county_name, state_fips, county_fips, county_ns, aland, awater)
+```
+
+Et voila, cleaned and merged data. 

@@ -1,6 +1,6 @@
 # countyfipsR
 
-`countyfipsR` is a simple R crosswalk package for adding various county-level identifiers (name, FIPS, ICPSR codes) that may be missing from your dataset. The purpose of this program is to facilitate merging datasets that do not share a common identifier.
+`countyfipsR` is a simple R crosswalk package for adding various county-level identifiers (name, FIPS, GNIS codes) that may be missing from your dataset. The purpose of this program is to facilitate merging datasets that do not share a common identifier.
 
 ## Installation
 You can install the latest version of `countyfipsR` from GitHub:

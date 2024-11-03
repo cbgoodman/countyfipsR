@@ -29,3 +29,7 @@ head(dataIL)
 ```
 
 ## Merging Data
+Since the resultant data are a `tibble`, merging is relatively straightforward. 
+
+GNIS https://www.usgs.gov/us-board-on-geographic-names/download-gnis-data
+

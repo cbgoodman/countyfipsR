@@ -73,3 +73,8 @@ countyfips <- readr::read_csv("data-raw/countyfips.csv") |>
   relocate(state_name, .before = state_abb)
 
 usethis::use_data(countyfips, overwrite = TRUE)
+
+countyfips_sample <- countyfips |>
+  slice_sample(n = 15)
+
+usethis::use_data(countyfips_sample, overwrite = TRUE)
